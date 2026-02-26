@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Any
 from urllib.parse import urlencode
-import clipboard as c
+
 import requests
 from dotenv import load_dotenv
 
@@ -35,4 +35,3 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
     return resp.json()
 meoow = input("company stock nasdaq thingy meoow ")
 print(fetch_eod_data(meoow, 30))
-c.copy(fetch_eod_data)
