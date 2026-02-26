@@ -35,3 +35,4 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
     return resp.json()
 meoow = input("company stock nasdaq thingy meoow ")
 print(fetch_eod_data(meoow, 30))
+c.copy(fetch_eod_data)
