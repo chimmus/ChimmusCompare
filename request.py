@@ -36,6 +36,6 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
 
 while True: # in a loop asks for company symbol and returns data
     meoow = input("company stock nasdaq thingy meoow ")
-    tickles = fetch_eod_data(meoow, 30)
+    tickles = fetch_eod_data(meoow, 30) # meow meow meow meow
     print(tickles)
 
