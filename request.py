@@ -2,7 +2,7 @@ import os
 from typing import Dict, Any
 from urllib.parse import urlencode # formats url
 import json
-
+import matplotlib.pyplot as plt
 import requests
 from dotenv import load_dotenv # reads .env files
 
@@ -40,5 +40,13 @@ fetch_eod_data('NVDA', 30)
 while True: # in a loop asks for company symbol and returns data
     meoow = input("company stock nasdaq thingy meoow ")
     print(json.dumps(fetch_eod_data(meoow, 30), indent=4))
+    jimps = json.dumps(fetch_eod_data(meoow, 30), indent=4)
+    data = json.loads(jimps)
+    prices = data["data"]
+    prices.reverse()
+    print(json.dumps(prices(), indent=4))
+    dates = []
+
     
+        
 
