@@ -1,6 +1,7 @@
 import os
 from typing import Dict, Any
 from urllib.parse import urlencode # formats url
+import json
 
 import requests
 from dotenv import load_dotenv # reads .env files
@@ -31,11 +32,13 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
 
     if resp.status_code != 200: # checks if response is valid
         raise RuntimeError(f"HTTP error {resp.status_code}: {resp.text[:200]}")
-    
+    woof = json.dumps(resp.json(), indent=4)
+    print(woof)
     return resp.json()
-
+    
+fetch_eod_data('NVDA', 30)
 while True: # in a loop asks for company symbol and returns data
     meoow = input("company stock nasdaq thingy meoow ")
-    tickles = fetch_eod_data(meoow, 30) # meow meow meow meow
-    print(tickles)
+    print(json.dumps(fetch_eod_data(meoow, 30), indent=4))
+    
 
