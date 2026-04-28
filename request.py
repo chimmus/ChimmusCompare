@@ -5,9 +5,9 @@ import json
 import matplotlib.pyplot as plt
 import requests
 from dotenv import load_dotenv # reads .env files
+from datetime import datetime
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
-
 
 def _get_api_key() -> str:
     load_dotenv()
@@ -44,9 +44,18 @@ while True: # in a loop asks for company symbol and returns data
     data = json.loads(jimps)
     prices = data["data"]
     prices.reverse()
-    print(json.dumps(prices(), indent=4))
+    print(json.dumps(prices, indent=4))
     dates = []
 
-    
-        
-
+    for day in prices:
+        print(" ", day["date"], "->", day["close"])
+    dates = []                                      
+    for day in prices:                                
+        date_string = day["date"]                       
+        cleaned = date_string.replace("Z", "")        
+        date_object = datetime.fromisoformat(cleaned)  
+        dates.append(date_object)   
+    closes = []
+    for day in prices:
+        close_price = day["close"]
+        closes.append(close_price)
