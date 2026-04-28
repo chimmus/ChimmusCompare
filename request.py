@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import requests
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
+import random
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
@@ -39,8 +40,8 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
 fetch_eod_data('NVDA', 30)
 while True: # in a loop asks for company symbol and returns data
     meoow = input("company stock nasdaq thingy meoow ")
-    print(json.dumps(fetch_eod_data(meoow, 30), indent=4))
-    jimps = json.dumps(fetch_eod_data(meoow, 30), indent=4)
+    print(json.dumps(fetch_eod_data(meoow, 7), indent=4))
+    jimps = json.dumps(fetch_eod_data(meoow, 7), indent=4)
     data = json.loads(jimps)
     prices = data["data"]
     prices.reverse()
@@ -67,3 +68,12 @@ while True: # in a loop asks for company symbol and returns data
     print("\nMin:", min(closes))
     print("Max:", max(closes))
     print("Average:", sum(closes) / len(closes))
+    plt.plot(dates, closes, marker="o")   # dot at every data point
+    plt.title("MSFT — Closing Price")
+    plt.xlabel("Date")
+    plt.ylabel("Price (USD)")
+    plt.xticks(rotation=45)              # tilt date labels so they don't overlap
+    plt.tight_layout()
+    namechart = random.randint(1, 1000000)
+    plt.savefig(f"chart_{namechart}{meoow}.png", dpi=150, bbox_inches="tight")
+    
