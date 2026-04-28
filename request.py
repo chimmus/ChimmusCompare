@@ -69,7 +69,7 @@ while True: # in a loop asks for company symbol and returns data
     print("Max:", max(closes))
     print("Average:", sum(closes) / len(closes))
     plt.plot(dates, closes, marker="o")   # dot at every data point
-    plt.title("MSFT — Closing Price")
+    plt.title(f"{meoow} - Closing Price")
     plt.xlabel("Date")
     plt.ylabel("Price (USD)")
     plt.xticks(rotation=45)              # tilt date labels so they don't overlap
