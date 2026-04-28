@@ -56,6 +56,14 @@ while True: # in a loop asks for company symbol and returns data
         date_object = datetime.fromisoformat(cleaned)  
         dates.append(date_object)   
     closes = []
+
     for day in prices:
         close_price = day["close"]
         closes.append(close_price)
+
+    print("All closing prices:")
+    print(*closes, sep='\n')
+
+    print("\nMin:", min(closes))
+    print("Max:", max(closes))
+    print("Average:", sum(closes) / len(closes))
