@@ -1,9 +1,9 @@
-import os
+import os # imports operating system so we can do commands via terminal
 from typing import Dict, Any
 from urllib.parse import urlencode # formats url
-import json
-import matplotlib.pyplot as plt
-import requests
+import json # for printing json data in a readable way
+import matplotlib.pyplot as plt # for making charts
+import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
 import random
@@ -33,11 +33,12 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
 
     if resp.status_code != 200: # checks if response is valid
         raise RuntimeError(f"HTTP error {resp.status_code}: {resp.text[:200]}")
-    woof = json.dumps(resp.json(), indent=4)
-    print(woof)
-    return resp.json()
+    woof = json.dumps(resp.json(), indent=4) # we basically made this for like yk testing
+    print(woof) # then this basically like js tests, we keep this here for fun!
+    return resp.json() # we return the data, so when this function is called, it can be called as a variable
     
 fetch_eod_data('NVDA', 30)
+# loop so we can like js keep asking it and all that
 while True: # in a loop asks for company symbol and returns data
     meoow = input("company stock nasdaq thingy meoow ")
     print(json.dumps(fetch_eod_data(meoow, 7), indent=4))
@@ -48,7 +49,7 @@ while True: # in a loop asks for company symbol and returns data
     print(json.dumps(prices, indent=4))
     dates = []
 
-    for day in prices:
+    for day in prices: # so for every 'day' in the prices like uh
         print(" ", day["date"], "->", day["close"])
     dates = []                                      
     for day in prices:                                
