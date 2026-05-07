@@ -50,31 +50,31 @@ while True: # in a loop asks for company symbol and returns data
     dates = []
 
     for day in prices: # so for every 'day' in the prices like uh
-        print(" ", day["date"], "->", day["close"])
-    dates = []                                      
-    for day in prices:                                
-        date_string = day["date"]                       
-        cleaned = date_string.replace("Z", "")        
-        date_object = datetime.fromisoformat(cleaned)  
-        dates.append(date_object)   
-    closes = []
+        print(" ", day["date"], "->", day["close"]) # then we print the date + the closing price from the json dict
+    dates = []     # new list                                 
+    for day in prices:       # for every 'day' in the prices dict                         
+        date_string = day["date"]                       # makes a string for the date and assigns to date
+        cleaned = date_string.replace("Z", "")        # removes Z and replace with nothing
+        date_object = datetime.fromisoformat(cleaned)  # formats to iso 
+        dates.append(date_object)   # adds the date object thing to date list
+    closes = [] # close list
 
     for day in prices:
-        close_price = day["close"]
-        closes.append(close_price)
+        close_price = day["close"] # prints the closing price for every day
+        closes.append(close_price) # adds to list
 
-    print("All closing prices:")
-    print(*closes, sep='\n')
+    print("All closing prices:") # prints what ever this is
+    print(*closes, sep='\n') # prings the closings and all that on new line
 
-    print("\nMin:", min(closes))
-    print("Max:", max(closes))
-    print("Average:", sum(closes) / len(closes))
+    print("\nMin:", min(closes)) # new line , closing
+    print("Max:", max(closes)) # prints the maximum closing rpice
+    print("Average:", sum(closes) / len(closes)) # gives the average
     plt.plot(dates, closes, marker="o")   # dot at every data point
-    plt.title(f"{meoow} - Closing Price")
-    plt.xlabel("Date")
-    plt.ylabel("Price (USD)")
+    plt.title(f"{meoow} - Closing Price") # names the graph
+    plt.xlabel("Date") # dates on axis
+    plt.ylabel("Price (USD)") # axis price
     plt.xticks(rotation=45)              # tilt date labels so they don't overlap
     plt.tight_layout()
-    namechart = random.randint(1, 1000000)
+    namechart = random.randint(1, 1000000) # give unique id
     plt.savefig(f"chart_{namechart}{meoow}.png", dpi=150, bbox_inches="tight")
     
