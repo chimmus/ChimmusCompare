@@ -77,4 +77,4 @@ while True: # in a loop asks for company symbol and returns data
     plt.tight_layout()
     namechart = random.randint(1, 1000000) # give unique id
     plt.savefig(f"chart_{namechart}{meoow}.png", dpi=150, bbox_inches="tight")
-    
+    # meow
