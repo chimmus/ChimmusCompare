@@ -10,8 +10,8 @@ import random
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
-def _get_api_key() -> str:
-    load_dotenv()
+def _get_api_key() -> str: # specifies it will be a string
+    load_dotenv() # loads dotenv from library
     key = os.getenv("MARKETSTACK_API_KEY") # gets api key from .env
     return key # returns the key when it is run so can be assigned to variable value
 
@@ -74,7 +74,7 @@ while True: # in a loop asks for company symbol and returns data
     plt.xlabel("Date") # dates on axis
     plt.ylabel("Price (USD)") # axis price
     plt.xticks(rotation=45)              # tilt date labels so they don't overlap
-    plt.tight_layout()
+    plt.tight_layout() #  sets the layour
     namechart = random.randint(1, 1000000) # give unique id
     plt.savefig(f"chart_{namechart}{meoow}.png", dpi=150, bbox_inches="tight")
     # meow
