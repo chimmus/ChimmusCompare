@@ -2,11 +2,10 @@ import os # imports operating system so we can do commands via terminal
 from typing import Dict, Any
 from urllib.parse import urlencode # formats url
 import json # for printing json data in a readable way
-import matplotlib.pyplot as plt # for making charts
+import plotext as plt # for making charts
 import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
-import random
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
@@ -62,11 +61,7 @@ while True: # in a loop asks for company symbol and returns data
                     dates2 = []
                     for day in prices2:
                         date_string = day["date"]
-                        normalized_date = date_string.replace("Z", "+00:00")
-                        if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
-                            normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
-                        date_object = datetime.fromisoformat(normalized_date)
-                        dates2.append(date_object)
+                        dates2.append(date_string[:10])
                     closes2 = []
                     for day in prices2:
                         close_price = day["close"]
@@ -77,11 +72,7 @@ while True: # in a loop asks for company symbol and returns data
     dates = []     # new list                                 
     for day in prices:       # for every 'day' in the prices dict                         
         date_string = day["date"]                       # makes a string for the date and assigns to date
-        normalized_date = date_string.replace("Z", "+00:00")
-        if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
-            normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
-        date_object = datetime.fromisoformat(normalized_date)
-        dates.append(date_object)   # adds the date object thing to date list
+        dates.append(date_string[:10])   # adds the date string to date list
     closes = [] # close list
 
     for day in prices:
@@ -94,14 +85,14 @@ while True: # in a loop asks for company symbol and returns data
     print("\nMin:", min(closes)) # new line , closing
     print("Max:", max(closes)) # prints the maximum closing rpice
     print("Average:", sum(closes) / len(closes)) # gives the average
-    plt.plot(dates, closes, marker="o")   # dot at every data point
+    
+    dates_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates]
+    plt.plot(dates_formatted, closes, marker="o")   # dot at every data point
     if 'dates2' in locals() and 'closes2' in locals():
-        plt.plot(dates2, closes2, marker="s")   # dot at every data point for second stock
-    plt.title(f"{ouch} - Closing Price") # names the graph
+        dates2_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates2]
+        plt.plot(dates2_formatted, closes2, marker="s")   # dot at every data point for second stock
+    plt.title(f"{ouch}") # names the graph
     plt.xlabel("Date") # dates on axis
     plt.ylabel("Price (USD)") # axis price
-    plt.xticks(rotation=45)              # tilt date labels so they don't overlap
-    plt.tight_layout() #  sets the layour
-    namechart = random.randint(1, 1000000) # give unique id
-    plt.savefig(f"chart_{namechart}{ouch}.png", dpi=150, bbox_inches="tight")
-    # meow
+    plt.show()
+    

@@ -6,7 +6,6 @@ import plotext as plt # for making charts
 import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
-import random
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
@@ -34,7 +33,6 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
     if resp.status_code != 200: # checks if response is valid
         raise RuntimeError(f"HTTP error {resp.status_code}: {resp.text[:200]}")
     woof = json.dumps(resp.json(), indent=4) # we basically made this for like yk testing
-    print(woof) # then this basically like js tests, we keep this here for fun!
     return resp.json() # we return the data, so when this function is called, it can be called as a variable
     
 fetch_eod_data('NVDA', 30)
@@ -63,11 +61,7 @@ while True: # in a loop asks for company symbol and returns data
                     dates2 = []
                     for day in prices2:
                         date_string = day["date"]
-                        normalized_date = date_string.replace("Z", "+00:00")
-                        if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
-                            normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
-                        date_object = datetime.fromisoformat(normalized_date)
-                        dates2.append(date_object)
+                        dates2.append(date_string[:10])
                     closes2 = []
                     for day in prices2:
                         close_price = day["close"]
@@ -78,11 +72,7 @@ while True: # in a loop asks for company symbol and returns data
     dates = []     # new list                                 
     for day in prices:       # for every 'day' in the prices dict                         
         date_string = day["date"]                       # makes a string for the date and assigns to date
-        normalized_date = date_string.replace("Z", "+00:00")
-        if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
-            normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
-        date_object = datetime.fromisoformat(normalized_date)
-        dates.append(date_object)   # adds the date object thing to date list
+        dates.append(date_string[:10])   # adds the date string to date list
     closes = [] # close list
 
     for day in prices:
@@ -96,9 +86,11 @@ while True: # in a loop asks for company symbol and returns data
     print("Max:", max(closes)) # prints the maximum closing rpice
     print("Average:", sum(closes) / len(closes)) # gives the average
     
-    plt.plot(dates, closes, marker="o")   # dot at every data point
+    dates_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates]
+    plt.plot(dates_formatted, closes, marker="o")   # dot at every data point
     if 'dates2' in locals() and 'closes2' in locals():
-        plt.plot(dates2, closes2, marker="s")   # dot at every data point for second stock
+        dates2_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates2]
+        plt.plot(dates2_formatted, closes2, marker="s")   # dot at every data point for second stock
     plt.title(f"{ouch}") # names the graph
     plt.xlabel("Date") # dates on axis
     plt.ylabel("Price (USD)") # axis price
