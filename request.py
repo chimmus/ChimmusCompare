@@ -54,8 +54,10 @@ while True: # in a loop asks for company symbol and returns data
     dates = []     # new list                                 
     for day in prices:       # for every 'day' in the prices dict                         
         date_string = day["date"]                       # makes a string for the date and assigns to date
-        cleaned = date_string.replace("Z", "")        # removes Z and replace with nothing
-        date_object = datetime.fromisoformat(cleaned)  # formats to iso 
+        normalized_date = date_string.replace("Z", "+00:00")
+        if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
+            normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
+        date_object = datetime.fromisoformat(normalized_date)
         dates.append(date_object)   # adds the date object thing to date list
     closes = [] # close list
 
