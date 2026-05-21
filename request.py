@@ -38,16 +38,19 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
 fetch_eod_data('NVDA', 30)
 # loop so we can like js keep asking it and all that
 while True: # in a loop asks for company symbol and returns data
-    meoow = input("company stock nasdaq thingy meoow ")
+    meoow = input("Enter your stock symbol")
     ouch = str(meoow[0] + meoow[1] + meoow[2] + meoow[3])
     print(json.dumps(fetch_eod_data(ouch, 7), indent=4))
+    plt.clear_terminal()
+    plt.clear_data()
+    plt.clear_figure()
     jimps = json.dumps(fetch_eod_data(ouch, 7), indent=4)
     data = json.loads(jimps)
     prices = data["data"]
     prices.reverse()
     print(json.dumps(prices, indent=4))
     dates = []
-    if len(meoow) >= 5:
+    if len(meoow) >= 6:
         if meoow[4] == ' ':
             if meoow[5] != ' ':
                 if meoow[5] != '':
@@ -56,8 +59,6 @@ while True: # in a loop asks for company symbol and returns data
                     data2 = json.loads(chimps)
                     prices2 = data2["data"]
                     prices2.reverse()
-                    for day in prices2:
-                        print(" ", day["date"], "->", day["close"]) 
                     dates2 = []
                     for day in prices2:
                         date_string = day["date"]
@@ -66,9 +67,6 @@ while True: # in a loop asks for company symbol and returns data
                     for day in prices2:
                         close_price = day["close"]
                         closes2.append(close_price)
-
-    for day in prices: # so for every 'day' in the prices like uh
-        print(" ", day["date"], "->", day["close"]) # then we print the date + the closing price from the json dict
     dates = []     # new list                                 
     for day in prices:       # for every 'day' in the prices dict                         
         date_string = day["date"]                       # makes a string for the date and assigns to date
@@ -78,13 +76,6 @@ while True: # in a loop asks for company symbol and returns data
     for day in prices:
         close_price = day["close"] # prints the closing price for every day
         closes.append(close_price) # adds to list
-
-    print("All closing prices:") # prints what ever this is
-    print(*closes, sep='\n') # prings the closings and all that on new line
-
-    print("\nMin:", min(closes)) # new line , closing
-    print("Max:", max(closes)) # prints the maximum closing rpice
-    print("Average:", sum(closes) / len(closes)) # gives the average
     
     dates_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates]
     plt.plot(dates_formatted, closes, marker="o")   # dot at every data point
