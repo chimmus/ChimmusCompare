@@ -49,29 +49,30 @@ while True: # in a loop asks for company symbol and returns data
     prices.reverse()
     print(json.dumps(prices, indent=4))
     dates = []
-    if meoow[4] == ' ':
-        if meoow[5] != ' ':
-            if meoow[5] != '':
-                second = str(meoow[5] + meoow[6] + meoow[7] + meoow[8])
-                chimps = (json.dumps(fetch_eod_data(second, 7), indent=4))
-                data2 = json.loads(chimps)
-                prices2 = data2["data"]
-                prices2.reverse()
-                for day in prices2:
-                    print(" ", day["date"], "->", day["close"]) 
-                dates2 = []
-                for day in prices2:
-                    date_string = day["date"]
-                    normalized_date = date_string.replace("Z", "+00:00")
-                    if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
-                        normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
-                    date_object = datetime.fromisoformat(normalized_date)
-                    dates2.append(date_object)
-                closes2 = []
-                for day in prices2:
-                    close_price = day["close"]
-                    closes2.append(close_price)
-                    
+    if len(meoow) >= 5:
+        if meoow[4] == ' ':
+            if meoow[5] != ' ':
+                if meoow[5] != '':
+                    second = str(meoow[5] + meoow[6] + meoow[7] + meoow[8])
+                    chimps = (json.dumps(fetch_eod_data(second, 7), indent=4))
+                    data2 = json.loads(chimps)
+                    prices2 = data2["data"]
+                    prices2.reverse()
+                    for day in prices2:
+                        print(" ", day["date"], "->", day["close"]) 
+                    dates2 = []
+                    for day in prices2:
+                        date_string = day["date"]
+                        normalized_date = date_string.replace("Z", "+00:00")
+                        if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
+                            normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
+                        date_object = datetime.fromisoformat(normalized_date)
+                        dates2.append(date_object)
+                    closes2 = []
+                    for day in prices2:
+                        close_price = day["close"]
+                        closes2.append(close_price)
+
     for day in prices: # so for every 'day' in the prices like uh
         print(" ", day["date"], "->", day["close"]) # then we print the date + the closing price from the json dict
     dates = []     # new list                                 
