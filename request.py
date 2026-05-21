@@ -48,7 +48,10 @@ while True: # in a loop asks for company symbol and returns data
     prices.reverse()
     print(json.dumps(prices, indent=4))
     dates = []
-
+    if meoow[4] == ' ':
+        if meoow[5] != ' ':
+            if meoow[5] != '':
+                second = str(meoow[5] + meoow[6] + meoow[7] + meoow[8])
     for day in prices: # so for every 'day' in the prices like uh
         print(" ", day["date"], "->", day["close"]) # then we print the date + the closing price from the json dict
     dates = []     # new list                                 
