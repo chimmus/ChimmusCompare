@@ -41,8 +41,9 @@ fetch_eod_data('NVDA', 30)
 # loop so we can like js keep asking it and all that
 while True: # in a loop asks for company symbol and returns data
     meoow = input("company stock nasdaq thingy meoow ")
-    print(json.dumps(fetch_eod_data(meoow, 7), indent=4))
-    jimps = json.dumps(fetch_eod_data(meoow, 7), indent=4)
+    ouch = str(meoow[0] + meoow[1] + meoow[2] + meoow[3])
+    print(json.dumps(fetch_eod_data(ouch, 7), indent=4))
+    jimps = json.dumps(fetch_eod_data(ouch, 7), indent=4)
     data = json.loads(jimps)
     prices = data["data"]
     prices.reverse()
@@ -52,6 +53,25 @@ while True: # in a loop asks for company symbol and returns data
         if meoow[5] != ' ':
             if meoow[5] != '':
                 second = str(meoow[5] + meoow[6] + meoow[7] + meoow[8])
+                chimps = (json.dumps(fetch_eod_data(second, 7), indent=4))
+                data2 = json.loads(chimps)
+                prices2 = data2["data"]
+                prices2.reverse()
+                for day in prices2:
+                    print(" ", day["date"], "->", day["close"]) 
+                dates2 = []
+                for day in prices2:
+                    date_string = day["date"]
+                    normalized_date = date_string.replace("Z", "+00:00")
+                    if len(normalized_date) >= 5 and normalized_date[-5] in ["+", "-"] and normalized_date[-3] != ":":
+                        normalized_date = normalized_date[:-2] + ":" + normalized_date[-2:]
+                    date_object = datetime.fromisoformat(normalized_date)
+                    dates2.append(date_object)
+                closes2 = []
+                for day in prices2:
+                    close_price = day["close"]
+                    closes2.append(close_price)
+                    
     for day in prices: # so for every 'day' in the prices like uh
         print(" ", day["date"], "->", day["close"]) # then we print the date + the closing price from the json dict
     dates = []     # new list                                 
@@ -75,11 +95,13 @@ while True: # in a loop asks for company symbol and returns data
     print("Max:", max(closes)) # prints the maximum closing rpice
     print("Average:", sum(closes) / len(closes)) # gives the average
     plt.plot(dates, closes, marker="o")   # dot at every data point
-    plt.title(f"{meoow} - Closing Price") # names the graph
+    if 'dates2' in locals() and 'closes2' in locals():
+        plt.plot(dates2, closes2, marker="s")   # dot at every data point for second stock
+    plt.title(f"{ouch} - Closing Price") # names the graph
     plt.xlabel("Date") # dates on axis
     plt.ylabel("Price (USD)") # axis price
     plt.xticks(rotation=45)              # tilt date labels so they don't overlap
     plt.tight_layout() #  sets the layour
     namechart = random.randint(1, 1000000) # give unique id
-    plt.savefig(f"chart_{namechart}{meoow}.png", dpi=150, bbox_inches="tight")
+    plt.savefig(f"chart_{namechart}{ouch}.png", dpi=150, bbox_inches="tight")
     # meow
