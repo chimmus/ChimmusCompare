@@ -34,7 +34,6 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
     if resp.status_code != 200: # checks if response is valid
         raise RuntimeError(f"HTTP error {resp.status_code}: {resp.text[:200]}")
     woof = json.dumps(resp.json(), indent=4) # we basically made this for like yk testing
-    print(woof) # then this basically like js tests, we keep this here for fun!
     return resp.json() # we return the data, so when this function is called, it can be called as a variable
     
 fetch_eod_data('NVDA', 30)
