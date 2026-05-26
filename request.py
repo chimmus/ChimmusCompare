@@ -37,56 +37,95 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
         raise RuntimeError(f"HTTP error {resp.status_code}: {resp.text[:200]}")
     woof = json.dumps(resp.json(), indent=4) # we basically made this for like yk testing
     return resp.json() # we return the data, so when this function is called, it can be called as a variable
-    
-fetch_eod_data('NVDA', 30)
-# loop so we can like js keep asking it and all that
+
+
+def _format_plotext_date(date_string: str) -> str:
+    """
+    Convert API date strings to plotext's expected format.
+    plotext candlestick requires dates in %d/%m/%Y.
+    """
+    date_short = date_string[:10]
+    try:
+        return datetime.strptime(date_short, "%Y-%m-%d").strftime("%d/%m/%Y")
+    except ValueError as exc:
+        raise ValueError("Date Form should be: %d/%m/%Y") from exc
+
+
 while True: # in a loop asks for company symbol and returns data
-    meoow = input("Enter your stock symbol")
-    ouch = str(meoow[0] + meoow[1] + meoow[2] + meoow[3])
-    print(json.dumps(fetch_eod_data(ouch, 7), indent=4))
-    plt.clear_terminal()
-    plt.clear_data()
-    plt.clear_figure()
-    jimps = json.dumps(fetch_eod_data(ouch, 7), indent=4)
-    data = json.loads(jimps)
+    meoow = input("Enter your stock symbol(s): ").strip() # strip removes whitespace from the beginning and end of the string. just incase
+    symbols = meoow.upper().split() # splitting the symbols up
+    if not symbols:
+        continue
+
+    ouch = symbols[0]
+    data = fetch_eod_data(ouch, 7)
     prices = data["data"]
     prices.reverse()
-    print(json.dumps(prices, indent=4))
-    dates = []
-    if len(meoow) >= 6:
-        if meoow[4] == ' ':
-            if meoow[5] != ' ':
-                if meoow[5] != '':
-                    second = str(meoow[5] + meoow[6] + meoow[7] + meoow[8])
-                    chimps = (json.dumps(fetch_eod_data(second, 7), indent=4))
-                    data2 = json.loads(chimps)
-                    prices2 = data2["data"]
-                    prices2.reverse()
-                    dates2 = []
-                    for day in prices2:
-                        date_string = day["date"]
-                        dates2.append(date_string[:10])
-                    closes2 = []
-                    for day in prices2:
-                        close_price = day["close"]
-                        closes2.append(close_price)
-    dates = []     # new list                                 
-    for day in prices:       # for every 'day' in the prices dict                         
-        date_string = day["date"]                       # makes a string for the date and assigns to date
-        dates.append(date_string[:10])   # adds the date string to date list
-    closes = [] # close list
 
-    for day in prices:
-        close_price = day["close"] # prints the closing price for every day
-        closes.append(close_price) # adds to list
-    
-    dates_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates]
-    plt.plot(dates_formatted, closes, marker="o")   # dot at every data point
-    if 'dates2' in locals() and 'closes2' in locals():
-        dates2_formatted = [datetime.strptime(d, "%Y-%m-%d").strftime("%d/%m/%Y") for d in dates2]
-        plt.plot(dates2_formatted, closes2, marker="s")   # dot at every data point for second stock
-    plt.title(f"{ouch}") # names the graph
-    plt.xlabel("Date") # dates on axis
-    plt.ylabel("Price (USD)") # axis price
+    second = symbols[1] if len(symbols) > 1 else None
+    if second:
+        data2 = fetch_eod_data(second, 7)
+        prices2 = data2["data"]
+        prices2.reverse()
+
+    plt.clear_terminal() # clear the terminal, we use this because i'd rather use this than using the os one because i want this to be a little bit more compatible
+    plt.clear_data() # clear plot data
+    plt.clear_figure() # clear the plot
+    print(json.dumps(prices, indent=4))
+    #defining lists
+    dates = []
+    closes = []
+    opens = []
+    highs = []
+    lows = []
+    for day in prices: # for every day in prices we we add the thing to the list
+        dates.append(_format_plotext_date(day["date"]))
+        closes.append(day["close"])
+        opens.append(day["open"])
+        highs.append(day["high"])
+        lows.append(day["low"])
+
+    candle_data = {
+        "Open": opens,
+        "High": highs,
+        "Low": lows,
+        "Close": closes,
+    }
+
+    plt.candlestick(
+        dates,
+        data=candle_data,
+        colors=["blue+", "green+"], # colours for the candle stick for stock symbol 1
+        label=ouch,
+    )
+    if second and "prices2" in locals():
+        dates2 = []
+        closes2 = []
+        opens2 = []
+        highs2 = []
+        lows2 = []
+        for day in prices2:
+            dates2.append(_format_plotext_date(day["date"]))
+            closes2.append(day["close"])
+            opens2.append(day["open"])
+            highs2.append(day["high"])
+            lows2.append(day["low"])
+        candle_data2 = {
+            "Open": opens2,
+            "High": highs2,
+            "Low": lows2,
+            "Close": closes2,
+        }
+        plt.candlestick(
+            dates2,
+            data=candle_data2,
+            colors=["red+", "orange+"], # colours for symbol 2
+            label=second,
+        )
+
+    title = ouch if not second else f"{ouch} vs {second}"
+    plt.title(title)
+    plt.xlabel("Date")
+    plt.ylabel("Price (USD)")
     plt.show()
     
