@@ -6,6 +6,7 @@ import plotext as plt # for making charts
 import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
+# these are prepared for our click module which we will be implementing soon!
 import sys
 import shlex
 import click
@@ -39,11 +40,7 @@ def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
     return resp.json() # we return the data, so when this function is called, it can be called as a variable
 
 
-def _format_plotext_date(date_string: str) -> str:
-    """
-    Convert API date strings to plotext's expected format.
-    plotext candlestick requires dates in %d/%m/%Y.
-    """
+def _format_plotext_date(date_string: str) -> str: # we found  this code online. it basically makes it so the date format can work (we programmed this program for windows)
     date_short = date_string[:10]
     try:
         return datetime.strptime(date_short, "%Y-%m-%d").strftime("%d/%m/%Y")
@@ -85,26 +82,26 @@ while True: # in a loop asks for company symbol and returns data
         highs.append(day["high"])
         lows.append(day["low"])
 
-    candle_data = {
+    candle_data = { # json telling us what data will be needed
         "Open": opens,
         "High": highs,
         "Low": lows,
         "Close": closes,
     }
 
-    plt.candlestick(
+    plt.candlestick( # creates a candle stick graph
         dates,
         data=candle_data,
         colors=["blue+", "green+"], # colours for the candle stick for stock symbol 1
         label=ouch,
     )
-    if second and "prices2" in locals():
+    if second and "prices2" in locals(): # checks if there is a second symbol
         dates2 = []
         closes2 = []
         opens2 = []
         highs2 = []
         lows2 = []
-        for day in prices2:
+        for day in prices2: # gets the closes and all that
             dates2.append(_format_plotext_date(day["date"]))
             closes2.append(day["close"])
             opens2.append(day["open"])
@@ -116,14 +113,14 @@ while True: # in a loop asks for company symbol and returns data
             "Low": lows2,
             "Close": closes2,
         }
-        plt.candlestick(
+        plt.candlestick( # adds it to the graph
             dates2,
             data=candle_data2,
             colors=["red+", "orange+"], # colours for symbol 2
             label=second,
         )
 
-    title = ouch if not second else f"{ouch} vs {second}"
+    title = ouch if not second else f"{ouch} vs {second}" # this is an example of a if statement in a string. this is usually used when people use IDLE start menu to test python
     plt.title(title)
     plt.xlabel("Date")
     plt.ylabel("Price (USD)")
