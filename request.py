@@ -6,6 +6,9 @@ import plotext as plt # for making charts
 import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
+import sys
+import shlex
+import click
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
