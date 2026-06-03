@@ -7,7 +7,7 @@
 Chimmus Compare
 </h1>
 
-Stock comparisons!
+### For documentation and explanation on how this all works click [here](https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation#how-does-it-work). 
 
 - Type out a symbol to get a candle stick graph about it!
 - Type 2 symbols (with a space seperating them) to get a candle stick graph about both!
