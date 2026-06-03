@@ -6,7 +6,7 @@ import plotext as plt # for making charts
 import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
-# these are prepared for our click module which we will be implementing soon!
+
 
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
@@ -67,6 +67,7 @@ while True: # in a loop asks for company symbol and returns data
     plt.clear_data() # clear plot data
     plt.clear_figure() # clear the plot
     print(json.dumps(prices, indent=4))
+    print(json.dumps(prices2, indent=4))
     #defining lists
     dates = []
     closes = []
