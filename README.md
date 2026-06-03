@@ -1,5 +1,12 @@
 # ChimmusCompare
 
+<h1 align="center">
+<sub>
+<img width="70" height="41" alt="image" src="https://github.com/user-attachments/assets/7a393ecf-254f-4b8c-9644-0d102d70d19d" />
+</sub>
+Chimmus Compare
+</h1>
+
 Stock comparisons!
 
 - Type out a symbol to get a candle stick graph about it!
