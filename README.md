@@ -1,5 +1,5 @@
 # ChimmusCompare
-
+https://img.shields.io/badge/github-repo-blue?logo=github
 <h1 align="center">
 <sub>
 <img width="70" height="41" alt="image" src="https://github.com/user-attachments/assets/7a393ecf-254f-4b8c-9644-0d102d70d19d" />
