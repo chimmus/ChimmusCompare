@@ -80,6 +80,17 @@ while True: # in a loop asks for company symbol and returns data
         highs.append(day["high"])
         lows.append(day["low"])
 
+    if closes:
+        growth1 = closes[-1] - closes[0]
+    else:
+        growth1 = 0
+    better1 = 0
+    for i in range(1, len(closes)):
+        if closes[i] > closes[i - 1]:
+            better1 += 1
+        elif closes[i] < closes[i - 1]:
+            better1 -= 1
+
     candle_data = { # json telling us what data will be needed
         "Open": opens,
         "High": highs,
@@ -105,6 +116,17 @@ while True: # in a loop asks for company symbol and returns data
             opens2.append(day["open"])
             highs2.append(day["high"])
             lows2.append(day["low"])
+        
+        better2 = 0
+        for i in range(1, len(closes2)):
+            if closes2[i] > closes2[i - 1]:
+                better2 += 1
+            elif closes2[i] < closes2[i - 1]:
+                better2 -= 1
+        if closes2:
+            growth2 = closes2[-1] - closes2[0]
+        else:
+            growth2 = 0
         candle_data2 = {
             "Open": opens2,
             "High": highs2,
@@ -118,9 +140,26 @@ while True: # in a loop asks for company symbol and returns data
             label=second,
         )
 
-    title = ouch if not second else f"{ouch} vs {second}" # this is an example of a if statement in a string. this is usually used when people use IDLE start menu to test python
+    if second:
+        title = f"{ouch} vs {second}"
+    else:
+        title = ouch
     plt.title(title)
     plt.xlabel("Date")
     plt.ylabel("Price (USD)")
     plt.show()
-    
+    if second:
+        if better1 > better2:
+            print(f"{ouch}'s price rises more than {second}!")
+        elif better2 > better1:
+            print(f"{second}'s price rise more than {ouch}!")
+        if better1 == better2:
+            print(f"rising seems to be the same!")
+    if second:
+        if growth1 > growth2:
+            print(f"{ouch} grew more than {second}!")
+        elif growth2 > growth1:
+            print(f"{second} grew more than {ouch}!")
+        if growth1 == growth2:
+            print(f"growth seems to be the same!")
+    # eventually we will track the percentage growth to truly track

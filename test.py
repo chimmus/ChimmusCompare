@@ -1,3 +1,7 @@
+# PLEASE READ
+# This file is for testing purposes. Instead of making a branch i was too lazy and just did this.
+# some thought processes may be found in this
+
 import os # imports operating system so we can do commands via terminal
 from typing import Dict, Any
 from urllib.parse import urlencode # formats url
