@@ -7,9 +7,7 @@ import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
 # these are prepared for our click module which we will be implementing soon!
-import sys
-import shlex
-import click
+
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
@@ -92,7 +90,7 @@ while True: # in a loop asks for company symbol and returns data
     plt.candlestick( # creates a candle stick graph
         dates,
         data=candle_data,
-        colors=["blue+", "green+"], # colours for the candle stick for stock symbol 1
+        colors=["red+", "green+"], # colours for the candle stick for stock symbol 1
         label=ouch,
     )
     if second and "prices2" in locals(): # checks if there is a second symbol
@@ -116,7 +114,7 @@ while True: # in a loop asks for company symbol and returns data
         plt.candlestick( # adds it to the graph
             dates2,
             data=candle_data2,
-            colors=["red+", "orange+"], # colours for symbol 2
+            colors=["blue+", "orange+"], # colours for symbol 2
             label=second,
         )
 
