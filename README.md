@@ -26,5 +26,12 @@ Stock comparisons!
 
 ## Dependencies:
 (This should work on latest version of Python on any device)
-- plotext
-- dotenv
+- [Plotext](https://pypi.org/project/plotext/)
+- [Dotenv](https://pypi.org/project/python-dotenv/)
+
+## Things I learnt
+- GitHub does not accept 64-bit images in their .md
+- How to use the [Plotext](https://pypi.org/project/plotext/) library
+- How to use the [Requests](https://pypi.org/project/requests/) library
+- How to make lists in Python efficiently and how to analyse them
+- How GitHub works
