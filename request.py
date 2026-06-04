@@ -47,6 +47,8 @@ def _format_plotext_date(date_string: str) -> str: # we found  this code online.
 
 
 while True: # in a loop asks for company symbol and returns data
+    point1 = 0
+    point2 = 0
     meoow = input("Enter your stock symbol(s): ").strip() # strip removes whitespace from the beginning and end of the string. just incase
     symbols = meoow.upper().split() # splitting the symbols up
     if not symbols:
@@ -167,20 +169,42 @@ while True: # in a loop asks for company symbol and returns data
     if second:
         if better1 > better2:
             print(f"{ouch}'s price rises more than {second}!")
+            point1 += 1
         elif better2 > better1:
             print(f"{second}'s price rise more than {ouch}!")
+            point2 += 1
         if better1 == better2:
             print(f"rising seems to be the same!")
+            point2 += 1
+            point1 += 1
     if second:
         if growthper > growthper2:
             print(f"{ouch} grew more than {second}!")
+            point1 += 1
         elif growthper2 > growthper:
             print(f"{second} grew more than {ouch}!")
+            point2 += 1
         if growthper == growthper2:
             print(f"growth seems to be the same!")
+            point1 += 1
+            point2 += 1
+    if second:
+        if growth1 > growth2:
+            point1 += 1
+        if growth1 < growth2:
+            point2 += 1
+        if growth1 == growth2:
+            point1 += 1
+            point2 += 1
     if second:
         if growthper < 0:
             print(f"{ouch} lost value by {growthper}%")
         if growthper2 < 0:
             print(f"{second} lost value by {growthper2}%")
+    if point1 > point2:
+        print(f"{ouch} seems to be the better option")
+    elif point2 > point1:
+        print(f"{second seems to be better option}")
+    else:
+        print("Both options seem to be good options")
     # eventually we will track the percentage growth to truly track
