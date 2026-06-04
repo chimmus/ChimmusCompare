@@ -38,6 +38,7 @@ Chimmus Compare
 - How to make lists in Python efficiently and how to analyse them
 - How GitHub works
 
+README.md was created by human
 <!---------------------------------[ Internal ]-------------------------------->
 [Repo]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus
 [Wiki]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki
