@@ -8,6 +8,7 @@ Chimmus Compare
 [![Badge]][Repo]
 [![Badge2]][Wiki]
 [![Badge3]][Link]
+[![Badge4]][Release]
 
 ### For documentation and explanation on how this all works click [here](https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation#how-does-it-work). 
 
@@ -41,8 +42,10 @@ Chimmus Compare
 [Repo]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus
 [Wiki]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki
 [Link]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/blob/Compare/request.py
+[Release]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/releases/tag/Tag
 
 <!----------------------------------[ Badges ]--------------------------------->
-[Badge]: https://img.shields.io/badge/github-repo-blue?logo=github
-[Badge2]: https://img.shields.io/badge/github-wiki-violet?logo=github
-[Badge3]: https://img.shields.io/badge/github-file-pink?logo=github
+[Badge]: https://img.shields.io/badge/repo-blue?logo=github
+[Badge2]: https://img.shields.io/badge/wiki-violet?logo=github
+[Badge3]: https://img.shields.io/badge/file-pink?logo=github
+[Badge4]: https://img.shields.io/badge/Release-red?logo=github
