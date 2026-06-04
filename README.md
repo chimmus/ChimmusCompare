@@ -1,5 +1,6 @@
 # ChimmusCompare
 [![Badge]][Repo]
+[![Badge2]][Wiki]
 <h1 align="center">
 <sub>
 <img width="70" height="41" alt="image" src="https://github.com/user-attachments/assets/7a393ecf-254f-4b8c-9644-0d102d70d19d" />
@@ -37,6 +38,8 @@ Chimmus Compare
 
 <!---------------------------------[ Internal ]-------------------------------->
 [Repo]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus
+[Wiki]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki
 
 <!----------------------------------[ Badges ]--------------------------------->
 [Badge]: https://img.shields.io/badge/github-repo-blue?logo=github
+[Badge2]: https://img.shields.io/badge/github-wiki-violet?logo=github
