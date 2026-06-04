@@ -21,7 +21,7 @@ I’m confirming what `plotext` supports for series styling so the change is bas
 
  dlestick))\nprint(plt.candlestick.__doc__)\n", 
 
-  "workingDirectory": "c:/Users/lim.m1/repos/comparison/ChimmusCompare", 
+  "workingDirectory": "c:/Users//repos/comparison/ChimmusCompare", 
 
   "timeout": 120000 
 
@@ -29,7 +29,7 @@ I’m confirming what `plotext` supports for series styling so the change is bas
 
   
 
-Read [](file:///c%3A/Users/lim.m1/repos/comparison/ChimmusCompare/request.py#45-45), lines 45 to 120 
+Read [](file:///c%3A/Users//repos/comparison/ChimmusCompare/request.py#45-45), lines 45 to 120 
 
   
 
