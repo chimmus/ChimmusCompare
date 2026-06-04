@@ -1,12 +1,13 @@
-# ChimmusCompare
-[![Badge]][Repo]
-[![Badge2]][Wiki]
 <h1 align="center">
 <sub>
 <img width="70" height="41" alt="image" src="https://github.com/user-attachments/assets/7a393ecf-254f-4b8c-9644-0d102d70d19d" />
 </sub>
 Chimmus Compare
 </h1>
+
+[![Badge]][Repo]
+[![Badge2]][Wiki]
+
 
 ### For documentation and explanation on how this all works click [here](https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation#how-does-it-work). 
 
