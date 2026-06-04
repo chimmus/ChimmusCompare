@@ -4,11 +4,14 @@
 </sub>
 Chimmus Compare
 </h1>
+<div align="center">
 
-[![Badge]][Repo]
-[![Badge2]][Wiki]
-[![Badge3]][Link]
-[![Badge4]][Release]
+  
+  [![Badge]][Repo]
+  [![Badge2]][Wiki]
+  [![Badge3]][Link]
+  [![Badge4]][Release]
+</div>
 
 ### For documentation and explanation on how this all works click [here](https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation#how-does-it-work). 
 
