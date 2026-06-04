@@ -17,6 +17,7 @@ Include the prompts you gave to AI (e.g., ChatGPT, GitHub Copilot), what it resp
 
  
 Here is my conversation: 
+```
 I’m confirming what `plotext` supports for series styling so the change is based on the library’s real behavior, not guesswork. 
 
  dlestick))\nprint(plt.candlestick.__doc__)\n", 
@@ -65,7 +66,7 @@ Made changes.
 Your response: 
 
  
-
+```
 
 hat did you learn? 
 # Did you use AI help you understand any concepts? Did you accept its suggestions as-is, change them, or decide not to use them. What did you learn in this lesson in general? 
