@@ -82,5 +82,7 @@ We also did some writing of documentation
 See if you can find your commit history to show the progress of your work so far, paste a screenshot of it below. 
 
 We used it to commit to the project 😊 
+<img width="763" height="936" alt="image" src="https://github.com/user-attachments/assets/e9abdc91-a8d6-416c-87c1-72122cfa8a0a" />
 
+random link below idk what i was watching but i think its about burgers
 https://www.youtube.com/watch?v=Ge-RxCjyHh8 
