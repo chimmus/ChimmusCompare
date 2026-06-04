@@ -148,11 +148,11 @@ while True: # in a loop asks for company symbol and returns data
             colors=["blue+", "orange+"], # colours for symbol 2
             label=second,
         )
-    if not second:
-        if growthper > 0:
-            print(f"{ouch} gained {growthper}%")
-        else:
-            print(f"{ouch} lost {growthper}%")
+
+    if growthper > 0:
+        print(f"{ouch} gained {growthper}%")
+    else:
+        print(f"{ouch} lost {growthper}%")
     if second:
         if growthper2 > 0:
             print(f"{second} gained {growthper2}%")
