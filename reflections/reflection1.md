@@ -9,6 +9,7 @@ Your response: we made it so it could recognise 2 stocks and graph those togethe
 # Include the prompts you gave to AI (e.g., ChatGPT, GitHub Copilot), what it responded with, and how you used or changed its suggestions. Paste a screenshot of each prompt you put into AI. 
 
 Your response: uh no we decided it was too tickled 
+<img width="209" height="139" alt="image" src="https://github.com/user-attachments/assets/96374e89-b69f-492b-95bd-ccf1a357f20b" />
 
  
 
