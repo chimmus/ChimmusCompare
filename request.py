@@ -1,3 +1,4 @@
+# For more documentation and annotations: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation
 import os # imports operating system so we can do commands via terminal
 from typing import Dict, Any
 from urllib.parse import urlencode # formats url
