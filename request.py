@@ -7,7 +7,7 @@ import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
 
-
+plt.clear_terminal()
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
@@ -67,7 +67,8 @@ while True: # in a loop asks for company symbol and returns data
     plt.clear_data() # clear plot data
     plt.clear_figure() # clear the plot
     print(json.dumps(prices, indent=4))
-    print(json.dumps(prices2, indent=4))
+    if second:
+        print(json.dumps(prices2, indent=4))
     #defining lists
     dates = []
     closes = []
@@ -80,11 +81,15 @@ while True: # in a loop asks for company symbol and returns data
         opens.append(day["open"])
         highs.append(day["high"])
         lows.append(day["low"])
-
+    growth1 = 0
+    growth2 = 0
     if closes:
         growth1 = closes[-1] - closes[0]
     else:
         growth1 = 0
+    print(growth1)
+    growthper = growth1 / closes[-1] * 100
+    print(growthper)
     better1 = 0
     for i in range(1, len(closes)):
         if closes[i] > closes[i - 1]:
@@ -128,6 +133,7 @@ while True: # in a loop asks for company symbol and returns data
             growth2 = closes2[-1] - closes2[0]
         else:
             growth2 = 0
+        growthper2 = growth2 / closes2[-1] * 100
         candle_data2 = {
             "Open": opens2,
             "High": highs2,
@@ -140,7 +146,16 @@ while True: # in a loop asks for company symbol and returns data
             colors=["blue+", "orange+"], # colours for symbol 2
             label=second,
         )
-
+    if not second:
+        if growthper > 0:
+            print(f"{ouch} gained {growthper}%")
+        else:
+            print(f"{ouch} lost {growthper}%")
+    if second:
+        if growthper2 > 0:
+            print(f"{second} gained {growthper2}%")
+        else:
+            print(f"{second} lost {growthper2}%")
     if second:
         title = f"{ouch} vs {second}"
     else:
@@ -157,10 +172,15 @@ while True: # in a loop asks for company symbol and returns data
         if better1 == better2:
             print(f"rising seems to be the same!")
     if second:
-        if growth1 > growth2:
+        if growthper > growthper2:
             print(f"{ouch} grew more than {second}!")
-        elif growth2 > growth1:
+        elif growthper2 > growthper:
             print(f"{second} grew more than {ouch}!")
-        if growth1 == growth2:
+        if growthper == growthper2:
             print(f"growth seems to be the same!")
+    if second:
+        if growthper < 0:
+            print(f"{ouch} lost value by {growthper}%")
+        if growthper2 < 0:
+            print(f"{second} lost value by {growthper2}%")
     # eventually we will track the percentage growth to truly track
