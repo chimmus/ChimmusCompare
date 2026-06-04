@@ -4,11 +4,11 @@
 </sub>
 Chimmus Compare
 </h1>
-<div align="center">
+
 [![Badge]][Repo]
 [![Badge2]][Wiki]
 [![Badge3]][Link]
-</div>
+
 ### For documentation and explanation on how this all works click [here](https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation#how-does-it-work). 
 
 - Type out a symbol to get a candle stick graph about it!
