@@ -2,6 +2,7 @@
 # Describe the task or challenge you were working on. What problem were you trying to solve? 
 
 i researched how to make my graph nicer 
+<img width="1691" height="805" alt="Screenshot 2026-06-03 193939" src="https://github.com/user-attachments/assets/b6d3ad2e-4430-44f4-a82b-a3656b37d12f" />
 
  
 
