@@ -204,7 +204,7 @@ while True: # in a loop asks for company symbol and returns data
     if point1 > point2:
         print(f"{ouch} seems to be the better option")
     elif point2 > point1:
-        print(f"{second seems to be better option}")
+        print(f"{second} seems to be better option")
     else:
         print("Both options seem to be good options")
     # eventually we will track the percentage growth to truly track
