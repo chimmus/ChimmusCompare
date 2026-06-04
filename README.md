@@ -17,11 +17,10 @@ Chimmus Compare
 
 
 ## Graphs for Stocks!
-<img width="1694" height="811" alt="image" src="https://github.com/user-attachments/assets/f20b4ffb-e7a0-4fca-ab5b-770c0da66ee6" />
-
+<img width="1691" height="805" alt="image" src="https://github.com/user-attachments/assets/7961790b-58c9-4d2c-8a6a-226886073d17" />
 
 ## Compare two symbols!
-<img width="1691" height="805" alt="image" src="https://github.com/user-attachments/assets/7961790b-58c9-4d2c-8a6a-226886073d17" />
+<img width="1694" height="811" alt="image" src="https://github.com/user-attachments/assets/f20b4ffb-e7a0-4fca-ab5b-770c0da66ee6" />
 
 
 ## Dependencies:
