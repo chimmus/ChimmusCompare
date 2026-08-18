@@ -46,7 +46,7 @@ README.md was created by human
 [Repo]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus
 [Wiki]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki
 [Link]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/blob/Compare/request.py
-[Release]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/releases/tag/Tag
+[Release]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/releases/tag/hot-fix
 
 <!----------------------------------[ Badges ]--------------------------------->
 [Badge]: https://img.shields.io/badge/repo-blue?logo=github
