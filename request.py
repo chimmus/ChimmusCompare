@@ -12,10 +12,43 @@ plt.clear_terminal()
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
-def _get_api_key() -> str: # specifies it will be a string
-    load_dotenv() # loads dotenv from library
-    key = os.getenv("MARKETSTACK_API_KEY") # gets api key from .env
-    return key # returns the key when it is run so can be assigned to variable value
+print(" ▄████████    ▄█    █▄     ▄█    ▄▄▄▄███▄▄▄▄     ▄▄▄▄███▄▄▄▄   ███    █▄     ▄████████")
+print("███    ███   ███    ███   ███  ▄██▀▀▀███▀▀▀██▄ ▄██▀▀▀███▀▀▀██▄ ███    ███   ███    ███")
+print("███    █▀    ███    ███   ███▌ ███   ███   ███ ███   ███   ███ ███    ███   ███    █▀")
+print("███         ▄███▄▄▄▄███▄▄ ███▌ ███   ███   ███ ███   ███   ███ ███    ███   ███")
+print("███        ▀▀███▀▀▀▀███▀  ███▌ ███   ███   ███ ███   ███   ███ ███    ███ ▀███████████")
+print("███    █▄    ███    ███   ███  ███   ███   ███ ███   ███   ███ ███    ███          ███")
+print("███    ███   ███    ███   ███  ███   ███   ███ ███   ███   ███ ███    ███    ▄█    ███")
+print("████████▀    ███    █▀    █▀    ▀█   ███   █▀   ▀█   ███   █▀  ████████▀   ▄████████▀")
+print("                                     ___________________ _________________ ____________")
+print("                                     _  ___/  __ \_  __ `__ \__  __ \  __ `/_  ___/  _ \\")
+print("                                     / /__ / /_/ /  / / / / /_  /_/ / /_/ /_  /   /  __/")
+print("                                     \___/ \____//_/ /_/ /_/_  .___/\__,_/ /_/    \___/")
+
+own_key = 0
+env_on = input("Do you have a .env file with your api key (y,n) ❯ ")
+if env_on == "y" or env_on == "Y" or "env_on" == "yes" or env_on == "Yes" or env_on == "YES":
+    own_key = 0
+elif env_on == "q" or env_on == "Q" or env_on == "QUIT" or env_on == "Quit" or env_on == "quit":
+    print("exiting program")
+    exit()
+else:
+    API_KEY = input("Please enter your API key ❯ ")
+    if API_KEY == "q" or API_KEY == "Q" or API_KEY == "QUIT" or API_KEY == "quit" or API_KEY == "Quit":
+        print("exiting program")
+        exit()
+    API_KEY = API_KEY.strip()
+    own_key = 1
+
+
+def _get_api_key() -> str:
+    if own_key == 0:
+        load_dotenv()
+        key = os.getenv("MARKETSTACK_API_KEY")
+        return key
+    else: 
+        return API_KEY
+
 
 
 def fetch_eod_data(symbol: str, limit: int = 30) -> Dict[str, Any]:
@@ -50,28 +83,35 @@ def _format_plotext_date(date_string: str) -> str: # we found  this code online.
 while True: # in a loop asks for company symbol and returns data
     point1 = 0
     point2 = 0
-    meoow = input("Enter your stock symbol(s): ").strip() # strip removes whitespace from the beginning and end of the string. just incase
-    symbols = meoow.upper().split() # splitting the symbols up
+    user_stock = input("Enter your stock symbol(s) ❯ ").strip() # strip removes whitespace from the beginning and end of the string. just incase
+    if user_stock == "quit" or user_stock == "QUIT" or user_stock == "Quit":
+        exit()
+    symbols = user_stock.upper().split() # splitting the symbols up
     if not symbols:
         continue
 
-    ouch = symbols[0]
-    data = fetch_eod_data(ouch, 7)
+    first = symbols[0]
+    try:
+        data = fetch_eod_data(first, 7)
+    except Exception:
+        print("possible errors found: not a valid stock symbol!, refresh your api key!")
+        continue
     prices = data["data"]
     prices.reverse()
 
     second = symbols[1] if len(symbols) > 1 else None
     if second:
-        data2 = fetch_eod_data(second, 7)
+        try:
+            data2 = fetch_eod_data(second, 7)
+        except Exception:
+            print("possible errors found: not a valid stock symbol!, refresh your api key!")            
+            continue
         prices2 = data2["data"]
         prices2.reverse()
 
     plt.clear_terminal() # clear the terminal, we use this because i'd rather use this than using the os one because i want this to be a little bit more compatible
     plt.clear_data() # clear plot data
     plt.clear_figure() # clear the plot
-    print(json.dumps(prices, indent=4))
-    if second:
-        print(json.dumps(prices2, indent=4))
     #defining lists
     dates = []
     closes = []
@@ -90,9 +130,7 @@ while True: # in a loop asks for company symbol and returns data
         growth1 = closes[-1] - closes[0]
     else:
         growth1 = 0
-    print(growth1)
     growthper = growth1 / closes[-1] * 100
-    print(growthper)
     better1 = 0
     for i in range(1, len(closes)):
         if closes[i] > closes[i - 1]:
@@ -111,7 +149,7 @@ while True: # in a loop asks for company symbol and returns data
         dates,
         data=candle_data,
         colors=["red+", "green+"], # colours for the candle stick for stock symbol 1
-        label=ouch,
+        label=first,
     )
     if second and "prices2" in locals(): # checks if there is a second symbol
         dates2 = []
@@ -150,29 +188,30 @@ while True: # in a loop asks for company symbol and returns data
             label=second,
         )
 
-    if growthper > 0:
-        print(f"{ouch} gained {growthper}%")
+    if second:
+        title = f"{first} vs {second}"
     else:
-        print(f"{ouch} lost {growthper}%")
+        title = first
+    plt.title(title)
+    plt.xlabel("Date")
+    plt.ylabel("Price (USD)")
+    plt.show()
+    if growthper > 0:
+        print(f"{first} gained {growthper}%")
+    else:
+        print(f"{first} lost {growthper}%")
     if second:
         if growthper2 > 0:
             print(f"{second} gained {growthper2}%")
         else:
             print(f"{second} lost {growthper2}%")
-    if second:
-        title = f"{ouch} vs {second}"
-    else:
-        title = ouch
-    plt.title(title)
-    plt.xlabel("Date")
-    plt.ylabel("Price (USD)")
-    plt.show()
+
     if second:
         if better1 > better2:
-            print(f"{ouch}'s price rises more than {second}!")
+            print(f"{first}'s price rises more than {second}!")
             point1 += 1
         elif better2 > better1:
-            print(f"{second}'s price rise more than {ouch}!")
+            print(f"{second}'s price rise more than {first}!")
             point2 += 1
         if better1 == better2:
             print(f"rising seems to be the same!")
@@ -180,10 +219,10 @@ while True: # in a loop asks for company symbol and returns data
             point1 += 1
     if second:
         if growthper > growthper2:
-            print(f"{ouch} grew more than {second}!")
+            print(f"{first} grew more than {second}!")
             point1 += 1
         elif growthper2 > growthper:
-            print(f"{second} grew more than {ouch}!")
+            print(f"{second} grew more than {first}!")
             point2 += 1
         if growthper == growthper2:
             print(f"growth seems to be the same!")
@@ -199,12 +238,12 @@ while True: # in a loop asks for company symbol and returns data
             point2 += 1
     if second:
         if growthper < 0:
-            print(f"{ouch} lost value by {growthper}%")
+            print(f"{first} lost value by {growthper}%")
         if growthper2 < 0:
             print(f"{second} lost value by {growthper2}%")
     if second:
         if point1 > point2:
-            print(f"{ouch} seems to be the better option")
+            print(f"{first} seems to be the better option")
         elif point2 > point1:
             print(f"{second} seems to be better option")
         else:
