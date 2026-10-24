@@ -10,10 +10,9 @@ Chimmus Compare
   [![Badge]][Repo]
   [![Badge2]][Wiki]
   [![Badge3]][Link]
-  [![Badge4]][Release]
 </div>
 
-### For documentation and explanation on how this all works click [here](https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki/Documentation#how-does-it-work). 
+### For documentation and explanation on how this all works click [here](https://github.com/chimmus/ChimmusCompare/wiki/Documentation#how-does-it-work). 
 
 - Type out a symbol to get a candle stick graph about it!
 - Type 2 symbols (with a space seperating them) to get a candle stick graph about both!
@@ -43,13 +42,13 @@ Chimmus Compare
 
 README.md was created by human
 <!---------------------------------[ Internal ]-------------------------------->
-[Repo]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus
-[Wiki]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/wiki
-[Link]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/blob/Compare/request.py
-[Release]: https://github.com/Waverley-Christian-College/3-marketstack-api-request-chimmus/releases/tag/hot-fix
+[Repo]: https://github.com/chimmus/ChimmusCompare
+[Wiki]: https://github.com/chimmus/ChimmusCompare/wiki
+[Link]: https://github.com/chimmus/ChimmusCompare/blob/Compare/request.py
+
 
 <!----------------------------------[ Badges ]--------------------------------->
 [Badge]: https://img.shields.io/badge/repo-blue?logo=github
 [Badge2]: https://img.shields.io/badge/wiki-violet?logo=github
 [Badge3]: https://img.shields.io/badge/file-pink?logo=github
-[Badge4]: https://img.shields.io/badge/Release-red?logo=github
+
