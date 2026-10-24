@@ -12,6 +12,8 @@ Chimmus Compare
   [![Badge3]][Link]
 </div>
 
+> This was originally made for a school project. I have removed most of the unnecessary stuff and cleaned up the code a bit.
+
 ### For documentation and explanation on how this all works click [here](https://github.com/chimmus/ChimmusCompare/wiki/Documentation#how-does-it-work). 
 
 - Type out a symbol to get a candle stick graph about it!
