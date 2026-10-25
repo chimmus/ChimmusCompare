@@ -8,7 +8,7 @@ import requests # requests library for making requests to api server
 from dotenv import load_dotenv # reads .env files
 from datetime import datetime
 
-plt.clear_terminal()
+plt.clt()
 
 BASE_URL = "http://api.marketstack.com/v1/eod"
 
@@ -109,7 +109,7 @@ while True: # in a loop asks for company symbol and returns data
         prices2 = data2["data"]
         prices2.reverse()
 
-    plt.clear_terminal() # clear the terminal, we use this because i'd rather use this than using the os one because i want this to be a little bit more compatible
+    plt.clt() # clear the terminal, we use this because i'd rather use this than using the os one because i want this to be a little bit more compatible
     plt.clear_data() # clear plot data
     plt.clear_figure() # clear the plot
     #defining lists
